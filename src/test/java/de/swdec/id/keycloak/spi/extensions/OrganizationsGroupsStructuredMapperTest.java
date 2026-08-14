@@ -1,4 +1,4 @@
-package de.swdec.jaccount.keycloak.spi.extensions;
+package de.swdec.id.keycloak.spi.extensions;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -16,6 +16,8 @@ import org.keycloak.models.UserModel;
 import org.keycloak.models.UserSessionModel;
 import org.keycloak.organization.OrganizationProvider;
 import org.keycloak.representations.AccessToken;
+
+import de.swdec.id.keycloak.spi.extensions.OrganizationsGroupsStructuredMapper;
 
 public class OrganizationsGroupsStructuredMapperTest {
 

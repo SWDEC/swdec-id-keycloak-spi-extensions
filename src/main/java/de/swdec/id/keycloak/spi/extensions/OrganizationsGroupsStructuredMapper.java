@@ -1,4 +1,4 @@
-package de.swdec.jaccount.keycloak.spi.extensions;
+package de.swdec.id.keycloak.spi.extensions;
 
 import java.util.ArrayList;
 import java.util.HashMap;
