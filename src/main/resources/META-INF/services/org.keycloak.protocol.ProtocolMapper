@@ -1,1 +1,2 @@
 de.swdec.id.keycloak.spi.extensions.OrganizationsGroupsStructuredMapper
+de.swdec.id.keycloak.spi.extensions.NextcloudOrgAndOrgGroupsMapper
