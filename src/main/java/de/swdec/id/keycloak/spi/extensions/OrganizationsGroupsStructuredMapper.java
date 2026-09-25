@@ -168,11 +168,6 @@ public class OrganizationsGroupsStructuredMapper
 
         System.out.println("USERINFO user.id       = " + user.getId());
         System.out.println("USERINFO username      = " + user.getUsername());
-        System.out.println("USERINFO realm         = " + session.getContext().getRealm().getId());
-        System.out.println("USERINFO local storage = " + StorageId.isLocalStorage(user.getId()));
-        System.out.println("USERINFO organizations = " + orgs.stream()
-                .map(o -> o.getId() + "/" + o.getAlias())
-                .toList());
 
         List<Map<String, String>> orgGroups = organizations.stream()
                 .flatMap(org -> {
