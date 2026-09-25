@@ -9,6 +9,7 @@ import org.keycloak.models.ClientSessionContext;
 import org.keycloak.models.KeycloakSession;
 import org.keycloak.models.OrganizationModel;
 import org.keycloak.models.ProtocolMapperModel;
+import org.keycloak.models.RealmModel;
 import org.keycloak.models.UserModel;
 import org.keycloak.models.UserSessionModel;
 import org.keycloak.models.utils.ModelToRepresentation;
@@ -166,36 +167,14 @@ public class OrganizationsGroupsStructuredMapper
                         .map(o -> o.getId() + "/" + o.getAlias())
                         .toList());
 
+        System.out.println("all orgs = " +
+            orgProvider.getAllStream()
+                        .toList());
+
         System.out.println("USERINFO user.id       = " + user.getId());
         System.out.println("USERINFO username      = " + user.getUsername());
 
         System.out.println("orgProvider = " + orgProvider.getClass());
-
-        // System.out.println(
-        //     "isLocalStorage = " +
-        //     StorageId.isLocalStorage(user.getId())
-        // );
-
-        // System.out.println(
-        //     "byMember = " +
-        //     orgProvider.getByMember(user)
-        //         .map(o -> o.getId() + " / " + o.getAlias())
-        //         .toList()
-        // );
-
-        OrganizationProvider jpaOrgProvider =
-                session.getProvider(OrganizationProvider.class, "jpa");
-
-        if (jpaOrgProvider != null) {
-            System.out.println(
-                "jpaByMember = " +
-                jpaOrgProvider.getByMember(user)
-                    .map(o -> o.getId() + " / " + o.getAlias())
-                    .toList()
-            );
-        } else {
-            System.out.println("jpaOrgProvider is null");
-        }
 
         List<Map<String, String>> orgGroups = organizations.stream()
                 .flatMap(org -> {
