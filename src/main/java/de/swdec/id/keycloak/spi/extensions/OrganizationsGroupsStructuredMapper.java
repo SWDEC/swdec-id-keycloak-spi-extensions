@@ -169,6 +169,34 @@ public class OrganizationsGroupsStructuredMapper
         System.out.println("USERINFO user.id       = " + user.getId());
         System.out.println("USERINFO username      = " + user.getUsername());
 
+        System.out.println("orgProvider = " + orgProvider.getClass());
+
+        // System.out.println(
+        //     "isLocalStorage = " +
+        //     StorageId.isLocalStorage(user.getId())
+        // );
+
+        // System.out.println(
+        //     "byMember = " +
+        //     orgProvider.getByMember(user)
+        //         .map(o -> o.getId() + " / " + o.getAlias())
+        //         .toList()
+        // );
+
+        OrganizationProvider jpaOrgProvider =
+                session.getProvider(OrganizationProvider.class, "jpa");
+
+        if (jpaOrgProvider != null) {
+            System.out.println(
+                "jpaByMember = " +
+                jpaOrgProvider.getByMember(user)
+                    .map(o -> o.getId() + " / " + o.getAlias())
+                    .toList()
+            );
+        } else {
+            System.out.println("jpaOrgProvider is null");
+        }
+
         List<Map<String, String>> orgGroups = organizations.stream()
                 .flatMap(org -> {
                     List<Map<String, String>> groups = new ArrayList<>();
@@ -212,7 +240,7 @@ public class OrganizationsGroupsStructuredMapper
                     return groups.stream();
                 })
                 .toList();
-        
+
         System.out.println("orgGroups.size = " + orgGroups.size());
         System.out.println("mapper config  = " + mappingModel.getConfig());
         System.out.println("claim.name     = " +
