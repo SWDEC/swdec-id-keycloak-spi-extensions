@@ -156,11 +156,25 @@ public class OrganizationsGroupsStructuredMapper
         OrganizationProvider orgProvider = session.getProvider(
                 OrganizationProvider.class);
         UserModel user = userSession.getUser();
-        Stream<OrganizationModel> organizations = orgProvider
-                .getByMember(user)
-                .filter(OrganizationModel::isEnabled);
+        List<OrganizationModel> organizations = orgProvider
+            .getByMember(user)
+            .filter(OrganizationModel::isEnabled)
+            .toList();
 
-        List<Map<String, String>> orgGroups = organizations
+        System.out.println("organizations = " +
+                organizations.stream()
+                        .map(o -> o.getId() + "/" + o.getAlias())
+                        .toList());
+
+        System.out.println("USERINFO user.id       = " + user.getId());
+        System.out.println("USERINFO username      = " + user.getUsername());
+        System.out.println("USERINFO realm         = " + session.getContext().getRealm().getId());
+        System.out.println("USERINFO local storage = " + StorageId.isLocalStorage(user.getId()));
+        System.out.println("USERINFO organizations = " + orgs.stream()
+                .map(o -> o.getId() + "/" + o.getAlias())
+                .toList());
+
+        List<Map<String, String>> orgGroups = organizations.stream()
                 .flatMap(org -> {
                     List<Map<String, String>> groups = new ArrayList<>();
 
@@ -203,6 +217,11 @@ public class OrganizationsGroupsStructuredMapper
                     return groups.stream();
                 })
                 .toList();
+        
+        System.out.println("orgGroups.size = " + orgGroups.size());
+        System.out.println("mapper config  = " + mappingModel.getConfig());
+        System.out.println("claim.name     = " +
+                mappingModel.getConfig().get(OIDCAttributeMapperHelper.TOKEN_CLAIM_NAME));
 
         // Always tell the OIDCAttributeMapperHelper that this property is multivalued
         // (= an array)
