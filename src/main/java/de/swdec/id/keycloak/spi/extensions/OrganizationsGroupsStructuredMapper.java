@@ -126,6 +126,8 @@ public class OrganizationsGroupsStructuredMapper
             KeycloakSession session,
             UserSessionModel userSession,
             ClientSessionContext clientSessionCtx) {
+        System.out.println("### BEFORE = " + token.getOtherClaims());
+
         final boolean orgsAsGroups = Boolean.parseBoolean(
                 mappingModel
                         .getConfig()
@@ -210,6 +212,8 @@ public class OrganizationsGroupsStructuredMapper
 
 
         OIDCAttributeMapperHelper.mapClaim(token, mappingModel, orgGroups);
+
+        System.out.println("### AFTER = " + token.getOtherClaims());
 
         return token;
     }
