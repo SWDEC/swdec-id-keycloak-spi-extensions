@@ -17,8 +17,6 @@ import org.keycloak.models.UserSessionModel;
 import org.keycloak.organization.OrganizationProvider;
 import org.keycloak.representations.AccessToken;
 
-import de.swdec.id.keycloak.spi.extensions.OrganizationsGroupsStructuredMapper;
-
 public class OrganizationsGroupsStructuredMapperTest {
 
     @Test
